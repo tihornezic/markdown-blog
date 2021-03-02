@@ -7,9 +7,9 @@ router.get('/new', (req, res) => {
     res.render('articles/new', {article: new Article()})
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:slug', async (req, res) => {
     // findById is asynchronus function
-    const article = await Article.findById(req.params.id)
+    const article = await Article.findOne({slug: req.params.slug})
     // if we cannot find an article, redirect user back to the home page
     if( article == null) res.redirect('/')
     res.render('articles/show', {article: article})
@@ -24,11 +24,16 @@ router.post('/', async (req, res) => {
     try {
         // asynchronus function
         article = await article.save()
-        res.redirect(`/articles/${article.id}`)
+        res.redirect(`/articles/${article.slug}`)
     } catch (e) {
         console.log(e)
         res.render('articles/new', {article: article})
     }
+})
+
+router.delete('/:id', async (req, res) => {
+    await Article.findByIdAndDelete(req.params.id)
+    res.redirect('/')
 })
 
 module.exports = router

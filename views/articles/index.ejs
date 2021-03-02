@@ -22,7 +22,11 @@
                     <div class='card-text mb-2'>
                         <%= article.description %>
                     </div>
-                    <a href='articles/<%= article.id %>' class='btn btn-secondary'>Read More</a>
+                    <a href='articles/<%= article.slug %>' class='btn btn-secondary'>Read More</a>
+                    <!-- using form instead of an anchor link! -->
+                    <form action='/articles/<%= article.id %>?_method=DELETE' method='POST' class='d-inline'>
+                        <button type='submit' class='btn btn-danger'>Delete</button>
+                    </form>
                 </div>
             </div>
         <% }) %>
