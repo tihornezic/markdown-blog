@@ -2,6 +2,7 @@
 // npm i --save-dev nodemon
 // npm i marked slugify
 // npm i method-override
+// npm i dompurify jsdom
 
 const express = require('express')
 const app = express()
